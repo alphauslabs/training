@@ -90,6 +90,6 @@ func main() {
 		logger.Info("duration:", time.Since(begin))
 	}(time.Now())
 
-	// sequential()
-	concurrent()
+	sequential()
+	// concurrent()
 }
