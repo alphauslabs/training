@@ -13,6 +13,7 @@ import (
 
 var (
 	file = flag.String("file", "", "Sample file to process")
+	cc   = flag.Bool("concurrent", false, "If true, run the concurrent function")
 )
 
 func sequential() {
@@ -90,6 +91,9 @@ func main() {
 		logger.Info("duration:", time.Since(begin))
 	}(time.Now())
 
-	sequential()
-	// concurrent()
+	if !*cc {
+		sequential()
+	} else {
+		concurrent()
+	}
 }
