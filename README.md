@@ -6,10 +6,10 @@ cd <folder>/
 go build -v
 
 # For Linux and MacOS:
-./{binary} [flag(s)]
+./{binary} [-flag(s)]
 
 # For Windows:
-.\{binary}.exe [flags(s)]
+.\{binary}.exe [-flags(s)]
 ```
 
 **To run `concurrent` folder:**
