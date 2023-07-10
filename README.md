@@ -2,8 +2,9 @@ Sample codes used in training/onboarding.
 
 **To run each sample:**
 ```bash
-cd <folder>
+cd <folder>/
 go build -v
+
 # For Linux and MacOS:
 ./{binary} [flag(s)]
 
@@ -17,6 +18,7 @@ go build -v
 ```bash
 cd concurrent/
 go build -v
+
 # For Linux and MacOS:
 ./concurrent -file $HOME/testcur.csv
 # or
