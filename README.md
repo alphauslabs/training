@@ -4,7 +4,7 @@ Sample codes used in training/onboarding.
 ```
 cd <folder>
 go build -v
-./{binary}
+./{binary} [flag(s)]
 ```
 
 **To run `concurrent` folder:**
