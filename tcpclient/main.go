@@ -1,11 +1,17 @@
 package main
 
 import (
+	"flag"
 	"net"
 	"os"
 )
 
+var (
+	msg = flag.String("msg", "hello", "Message to send to server")
+)
+
 func main() {
+	flag.Parse()
 	tcpServer, err := net.ResolveTCPAddr("tcp", "localhost:8080")
 	if err != nil {
 		println("ResolveTCPAddr failed:", err.Error())
@@ -18,7 +24,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	_, err = conn.Write([]byte("hello, server"))
+	_, err = conn.Write([]byte(*msg))
 	if err != nil {
 		println("Write data failed:", err.Error())
 		os.Exit(1)
