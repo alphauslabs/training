@@ -25,3 +25,5 @@ httpserver/httpserver
 
 # Go workspace file
 go.work
+
+httpclient-carl
