@@ -32,7 +32,9 @@ func handler(w http.ResponseWriter, r *http.Request) {
 
 	body, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		fmt.Printf("could not read body: %s\n", err)
+		fmt.Fprintf(&reply, "Error in reading body: %v\n", err)
+		fmt.Fprintf(w, reply.String())
+		return
 	}
 
 	defer r.Body.Close()
