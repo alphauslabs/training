@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {name}
+spec:
+  selector:
+    matchLabels:
+      app: {name}
+  replicas: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: {name}
+    spec:
+      containers:
+      - name: {name}
+        image: asia.gcr.io/labs-169405/{your-container}:{tag}
+        resources:
+          requests:
+            cpu: 100m
+            memory: 350Mi
+          limits:
+            cpu: 100m
+            memory: 350Mi
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
