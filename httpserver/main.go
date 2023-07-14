@@ -46,10 +46,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if msg.Id == "" || msg.Value == "" {
+		fmt.Fprintf(&reply, "Fields 'id' and 'value' are both required.\n")
+		fmt.Fprintf(w, reply.String())
+		return
+	}
+
 	fmt.Fprintf(&reply, "Your method is %v.\n", r.Method)
 	fmt.Fprintf(&reply, "Your X-Request header is %v.\n", xhdr)
 	fmt.Fprintf(&reply, "Your request body is %v.\n", string(body))
-	fmt.Fprintf(&reply, "All good!")
+	fmt.Fprintf(&reply, "All good!\n")
 	fmt.Fprintf(w, reply.String())
 	return
 }
