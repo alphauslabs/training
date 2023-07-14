@@ -16,7 +16,7 @@ type msgT struct {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	var reply strings.Builder
-	if r.Method != http.MethodPost { // request method should be POST
+	if r.Method != http.MethodPost {
 		fmt.Fprintf(&reply, "I need a POST method.\n")
 		fmt.Fprintf(w, reply.String())
 		return
