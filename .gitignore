@@ -13,6 +13,7 @@ concurrent/concurrent
 tcpserver/tcpserver
 tcpclient/tcpclient
 httpserver/httpserver
+httpclient-jovi/httpclient-jovi
 
 # Test binary, built with `go test -c`
 *.test
