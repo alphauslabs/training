@@ -15,7 +15,7 @@ type msgT struct {
 }
 
 func main() {
-	url := "http://localhost:8080"
+	url := "http://10.140.0.9:8080"
 
 	msg := msgT{
 		Id: "333",
