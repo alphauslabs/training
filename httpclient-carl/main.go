@@ -17,29 +17,34 @@ type msgT struct {
 func main() {
 	url := "http://localhost:8080"
 
-	
 	msg := msgT{
-		Id:    "101",
-		Value: "Hello, server! Hope your are doing well!",
-	}
-	payload, err := json.Marshal(msg)
-	if err != nil {
-		log.Fatalf("Error marshaling JSON: %v", err)
+		Id:    "1011",
+		Value: "Hello Server, how are you doing?",
 	}
 
-	
-	resp, err := http.Post(url, "application/json", bytes.NewBuffer(payload))
+	body, err := json.Marshal(msg)
 	if err != nil {
-		log.Fatalf("Error sending request: %v", err)
+		log.Fatalf("Failed to marshal request body: %v", err)
+	}
+
+	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(body))
+	if err != nil {
+		log.Fatalf("Failed to create request: %v", err)
+	}
+
+	req.Header.Set("X-Request", "Custom Header Value")
+
+	client := http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatalf("Failed to send request: %v", err)
 	}
 	defer resp.Body.Close()
 
-	
-	body, err := ioutil.ReadAll(resp.Body)
+	respBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalf("Error reading response: %v", err)
+		log.Fatalf("Failed to read response body: %v", err)
 	}
 
-
-	fmt.Println(string(body))
+	fmt.Println(string(respBody))
 }
