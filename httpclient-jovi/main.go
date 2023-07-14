@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 )
@@ -14,28 +15,38 @@ type msgT struct {
 }
 
 func main() {
-	url := "http://35.229.150.177:8080"
+	url := "http://localhost:8080"
 
-	msg := msgT {
+	msg := msgT{
 		Id: "333",
-		Value: "Hello, server! I am Jovi!",
+		Value: "Hi, I am Jovi!",
 	}
 
-	jsonMsg, err := json.Marshal(msg)
+	body, err := json.Marshal(msg)
 	if err != nil {
-		log.Fatalf("Error in Marshaling json: %v", err)
+		log.Fatalf("Error in marshaling request body: %v", err)
 	}
 
-	resp, err := http.Post(url, "application/json", bytes.NewBuffer(jsonMsg))
+	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(body))
 	if err != nil {
-		log.Fatalf("Error in making request: %v", err)
+		log.Fatalf("Error in creating request: %v", err)
+	}
+
+	req.Header.Set("X-Request", "Send a greeting")
+
+	client := http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Fatalf("Error in sending request: %v", err)
 	}
 
 	defer resp.Body.Close()
 
-	if resp.StatusCode == http.StatusOK {
-		fmt.Println("Connected successfully to the server!")
-	} else {
-		fmt.Println("Failed to connect to the server with status code: %v", resp.StatusCode)
+	respBody, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalf("Error in reading response body: %v", err)
 	}
+
+	fmt.Println(string(respBody))
+	fmt.Println("Connected to server!")
 }
